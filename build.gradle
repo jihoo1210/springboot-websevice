@@ -31,7 +31,24 @@ repositories {
     //jcenter()
 }
 //의존성 선언
+//버전을 명시하지 않으면 dependency-management가 자동적으로 springBootVersion을 참조하여 추가한다
 dependencies {
+    // Spring web
     compile('org.springframework.boot:spring-boot-starter-web')
+
+    //lombok
+    compile('org.projectlombok:lombok')
+
+    //Spring Data JPA
+    //스프링 부트 버전에 맞춰 자동으로 JPA 관련 라이브러리들의 버전을 관리한다
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    //H2 database
+    compile('com.h2database:h2')
+
+    // 머스테치
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+
+    //Junit
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
