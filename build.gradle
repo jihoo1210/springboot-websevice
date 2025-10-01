@@ -1,0 +1,37 @@
+//플러그인 의존성 관리
+buildscript {
+//전역 변수 설정
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        //jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+//위에 선언한 플러그인 적용 여부
+//자바와 스프링 부트를 이용하기 위해 필요한 필수 플러그인
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+//스프링 부트 의존성 관리 플러그인
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.boot.works'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+//의존성을 다운로드할 위치
+repositories {
+    mavenCentral()
+    //jcenter()
+}
+//의존성 선언
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
