@@ -10,5 +10,8 @@ spring:
       enabled: true
   profiles:
     include: 'oauth'
+# 세션 저장소 설정
+  session:
+    store-type: jdbc
 
 

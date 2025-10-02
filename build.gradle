@@ -49,6 +49,15 @@ dependencies {
     // 머스테치
     compile('org.springframework.boot:spring-boot-starter-mustache')
 
+    // 스프링 시큐리티
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+
+    //spring-session-jdbc
+    compile('org.springframework.session:spring-session-jdbc')
+
     //Junit
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // 스프링 시큐리티 테스트
+    testCompile('org.springframework.security:spring-security-test')
 }

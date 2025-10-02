@@ -1,10 +1,14 @@
 package com.boot.works.springboot.web;
 
+import com.boot.works.springboot.config.auth.SecurityConfig;
 import com.boot.works.springboot.web.dto.HelloResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,7 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //스프링 테스트 어노테이션 중 Web(Spring MVC)에 집중할 수 있는 어노테이션
 //@Controller, @ControllerAdvice 등을 사용할 수 있다
 //@Service, @Component, @Repository 등을 사용할 수 없다
-@WebMvcTest(controllers = HelloController.class)
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+})
 public class HelloControllerTest {
 
     @Autowired
@@ -28,6 +34,7 @@ public class HelloControllerTest {
     // 스프링 MVC 테스트의 시작점
     private MockMvc mvc;
 
+    @WithMockUser(roles = "USER")
     @Test
     public void returnHello() throws Exception{
         String hello = "hello";
@@ -40,8 +47,9 @@ public class HelloControllerTest {
                 .andExpect(content().string(hello));
     }
 
+    @WithMockUser(roles = "USER")
     @Test
-    public void lombokTest() {
+    public void helloDtoLombokTest() {
         //given
         String name = "test";
         int amount = 1000;
